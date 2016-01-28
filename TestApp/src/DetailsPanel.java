@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,6 +19,7 @@ public class DetailsPanel extends JPanel {
 	
 	public static JSpinner _layers;
 	
+	
 	public DetailsPanel(){
 		Dimension size = getPreferredSize();
 		size.width = 250;
@@ -37,6 +39,7 @@ public class DetailsPanel extends JPanel {
 		JButton addBtn = new JButton("Encrypt");
 		addBtn.addActionListener(new ButtonListener());
 
+		
 		
 		setLayout(new GridBagLayout());
 		
@@ -67,6 +70,7 @@ public class DetailsPanel extends JPanel {
 		gc.gridy = 1;
 		add(layers, gc);
 		
+		
 		// Final row!
 		gc.weighty = 10;
 		
@@ -75,6 +79,9 @@ public class DetailsPanel extends JPanel {
 		gc.gridy = 2;
 		add(addBtn, gc);
 		addBtn.setActionCommand("encrypt");
+		gc.gridy = 3;
+		
+		
 	}
 	
 }

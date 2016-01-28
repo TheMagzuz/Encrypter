@@ -5,6 +5,8 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
+import org.apache.commons.codec.binary.Base32;
+
 public class ButtonListener implements ActionListener{
 
 	private JFrame frame = App._frame;
@@ -18,7 +20,7 @@ public class ButtonListener implements ActionListener{
 
 		if (command.contains("encrypt")){
 			String msg = DetailsPanel.msg.getText();
-			MainFrame.text.setText("");
+			OutputPanel.msgOut.setText("");
 			int layers;
 			try {
 				layers = Integer.parseInt(DetailsPanel._layers.getValue().toString());
@@ -29,18 +31,21 @@ public class ButtonListener implements ActionListener{
 			}
 			String out = "";
 
-			byte[] msgB = msg.getBytes();
+			
 			
 			
 			for (int i = 0; i < layers; i++){
+				if (i == 0){
+					out = msg;
+				}
+				byte[] msgB = out.getBytes();
+
+				Base32 base32 = new Base32();
+				
 				Random r = new Random();
-				int type = 2;
-						//r.nextInt(2);
-				
-				char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-				
-				// The key for the ceasar cipher
-				int cKey = r.nextInt(alphabet.length);
+				int type = //2;
+						r.nextInt(3);
+
 				switch(type){
 
 				// Binary
@@ -61,23 +66,20 @@ public class ButtonListener implements ActionListener{
 						msgB = Base64.getEncoder().encode(msgB);
 						out = new String(msgB);
 						break;
-				// Ceasar
-				case 2:
-						o = "";
-						for (char c : msg.toCharArray()){
-							o = o + (alphabet[(c+cKey)%alphabet.length]);
-						}
-						out = o;
+				// BASE32
+				case 2:						
+						out =  new String(base32.encode(msgB));
+					
 						break;
-				default: out = "Something went wrong!"; 
+				default: out = "Something went wrong! Problem: Undefined encryption id"; 
 						break;
 				}
-				System.out.println(type);
+				System.out.println("Type id: " + type + " New message: " + out);
 				
 				
 			}
 			
-			MainFrame.text.setText(out);
+			OutputPanel.msgOut.setText(out);
 		}
 		
 		

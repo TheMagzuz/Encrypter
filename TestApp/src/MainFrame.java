@@ -13,6 +13,8 @@ public class MainFrame extends JFrame{
 
 	private DetailsPanel detailsPanel;
 	
+	private OutputPanel outputPanel;
+	
 	public static JTextArea text;
 	
 	MainFrame(String title){
@@ -29,6 +31,7 @@ public class MainFrame extends JFrame{
 		text = textArea;
 		
 		detailsPanel = new DetailsPanel();
+		outputPanel = new OutputPanel();
 		
 		Container c = getContentPane();
 		/*textArea.setEditable(false);
@@ -37,8 +40,9 @@ public class MainFrame extends JFrame{
 		c.add(msgLabel, BorderLayout.EAST);
 		c.add(textArea, BorderLayout.EAST);
 		c.add(keyLabel, BorderLayout.EAST);
-		c.add(key, BorderLayout.EAST);
-		c.add(detailsPanel, BorderLayout.WEST);*/
+		c.add(key, BorderLayout.EAST);*/
+		c.add(detailsPanel, BorderLayout.WEST);
+		c.add(outputPanel, BorderLayout.EAST);
 		
 		button.addActionListener(new ActionListener(){
 

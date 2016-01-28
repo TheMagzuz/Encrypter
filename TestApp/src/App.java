@@ -1,5 +1,9 @@
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 public class App {
@@ -10,7 +14,8 @@ public class App {
 		
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
-				JFrame frame = new MainFrame("Hello word");
+				HandleAppId();
+				JFrame frame = new MainFrame("Encrypter v0.1 by TheMagzuz");
 				_frame = (MainFrame) frame;
 				frame.setSize(800, 600);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,4 +29,13 @@ public class App {
 		System.exit(1);
 	}
 
+	private static void HandleAppId(){
+		try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+	              new FileOutputStream("Hello.txt"), "utf-8"))) {
+	   writer.write("something");
+	} catch(Exception e){
+		close();
+	}
+	}
+	
 }
